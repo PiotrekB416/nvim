@@ -7,7 +7,7 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
---  use 'ranjithshegde/ccls.nvim'
+  use 'ranjithshegde/ccls.nvim'
 
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -212,7 +212,7 @@ return require('packer').startup(function(use)
         commands = {},
         window = {
           position = "current",
-          --width = 40,
+          width = 30,
           mapping_options = {
             noremap = true,
             nowait = true,
