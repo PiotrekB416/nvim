@@ -5,6 +5,8 @@ require("theprimeagen.remap")
 -- vim.opt.rtp:append("~/personal/streamer-tools")
 -- DO NOT INCLUDE THIS
 
+--vim.cmd.packadd('YouCompleteMe')
+
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
 
