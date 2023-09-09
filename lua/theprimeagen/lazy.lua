@@ -1,20 +1,29 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Only required if you have packer configured as `opt`
-vim.cmd.packadd('packer.nvim')
 
-return require('packer').startup(function(use)
+require('lazy').setup({
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  'wbthomason/packer.nvim',
 
-  use 'ranjithshegde/ccls.nvim'
+  'ranjithshegde/ccls.nvim',
 
-  use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
+  {
+	  'nvim-telescope/telescope.nvim',-- branch = '0.1.0',
 	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
-  }
-  use 'Exafunction/codeium.vim'
+	  dependencies = { {'nvim-lua/plenary.nvim'} }
+  },
+  'Exafunction/codeium.vim',
 --  use({
 --	  'rose-pine/neovim',
 --	  as = 'rose-pine',
@@ -24,9 +33,9 @@ return require('packer').startup(function(use)
 --  })
 
   --theme
-  use 'Mofiqul/vscode.nvim'
+  'Mofiqul/vscode.nvim',
 
-  use({
+  {
       "folke/trouble.nvim",
       config = function()
           require("trouble").setup {
@@ -36,25 +45,27 @@ return require('packer').startup(function(use)
               -- refer to the configuration section below
           }
       end
-  })
+  },
 
-  use {
+  {
 			'nvim-treesitter/nvim-treesitter',
-			run = function()
+			build = function()
 				local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
 				ts_update()
-			end,}
-  use("nvim-treesitter/playground")
-  use("theprimeagen/harpoon")
-  use("theprimeagen/refactoring.nvim")
-  use("mbbill/undotree")
-  use("tpope/vim-fugitive")
-  use("nvim-treesitter/nvim-treesitter-context");
+			end
+  },
 
-  use {
+  'nvim-treesitter/playground',
+  'theprimeagen/harpoon',
+  'theprimeagen/refactoring.nvim',
+  'mbbill/undotree',
+  'tpope/vim-fugitive',
+  'nvim-treesitter/nvim-treesitter-context',
+
+  {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v1.x',
-	  requires = {
+	  dependencies = {
 		  -- LSP Support
 		  {'neovim/nvim-lspconfig'},
 		  {'williamboman/mason.nvim'},
@@ -72,25 +83,25 @@ return require('packer').startup(function(use)
 		  {'L3MON4D3/LuaSnip'},
 		  {'rafamadriz/friendly-snippets'},
 	  }
-  }
+  },
 
-  use("folke/zen-mode.nvim")
-  use("github/copilot.vim")
-  use("eandrju/cellular-automaton.nvim")
-  use("laytan/cloak.nvim")
+  'folke/zen-mode.nvim',
+  'github/copilot.vim',
+  'eandrju/cellular-automaton.nvim',
+  'laytan/cloak.nvim',
 
 
-  use {
+  {
   "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
       {
         -- only needed if you want to use the commands with "_with_window_picker" suffix
         's1n7ax/nvim-window-picker',
-        tag = "v1.*",
+        --branch = "v1.*",
         config = function()
           require'window-picker'.setup({
             autoselect_one = true,
@@ -387,6 +398,6 @@ return require('packer').startup(function(use)
 
       vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
     end
-}
-end)
+},
+})
 
