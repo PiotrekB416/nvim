@@ -13,7 +13,12 @@ vim.opt.rtp:prepend(lazypath)
 
 
 require('lazy').setup({
-  -- Packer can manage itself
+  {
+    'ThePrimeagen/lsp-debug-tools.nvim',
+    config = function()
+      require("lsp-debug-tools").restart({ expected = {}, name = "htmx-lsp", cmd = { "htmx-lsp", "--level", "DEBUG" }, root_dir = vim.loop.cwd(), });
+    end
+  },
   'wbthomason/packer.nvim',
 
   'ranjithshegde/ccls.nvim',
@@ -54,7 +59,6 @@ require('lazy').setup({
 				ts_update()
 			end
   },
-
   'nvim-treesitter/playground',
   'theprimeagen/harpoon',
   'theprimeagen/refactoring.nvim',
@@ -63,26 +67,50 @@ require('lazy').setup({
   'nvim-treesitter/nvim-treesitter-context',
 
   {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v1.x',
-	  dependencies = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    --lazy = true,
+    config = function()
+      -- This is where you modify the settings for lsp-zero
+      -- Note: autocompletion settings will not take effect
 
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-buffer'},
-		  {'hrsh7th/cmp-path'},
-		  {'saadparwaiz1/cmp_luasnip'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'hrsh7th/cmp-nvim-lua'},
+      require('lsp-zero.settings').preset({})
+    end
+  },
 
-		  -- Snippets
-		  {'L3MON4D3/LuaSnip'},
-		  {'rafamadriz/friendly-snippets'},
-	  }
+  -- Autocompletion
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    dependencies = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {'williamboman/mason.nvim'},           -- Optional
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+      -- Autocompletion
+      {
+        'hrsh7th/nvim-cmp',
+        config = function()
+            local cmp = require("cmp")
+            cmp.setup({
+              mapping = {
+                 ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+              }
+            })
+
+        end
+      },     -- Required
+      {'hrsh7th/cmp-nvim-lsp'}, -- Required
+      {'hrsh7th/cmp-nvim-lua'},
+      {'hrsh7th/cmp-buffer'},
+	  {'hrsh7th/cmp-path'},
+	  {'saadparwaiz1/cmp_luasnip'},
+
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},     -- Required
+      {'rafamadriz/friendly-snippets'}, -- Optional
+    }
   },
 
   'folke/zen-mode.nvim',
