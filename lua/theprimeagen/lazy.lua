@@ -28,7 +28,30 @@ require('lazy').setup({
 	  -- or                            , branch = '0.1.x',
 	  dependencies = { {'nvim-lua/plenary.nvim'} }
   },
-  'Exafunction/codeium.vim',
+
+
+  --{
+  --  'Exafunction/codeium.nvim',
+  --},
+  {
+    "Exafunction/codeium.nvim",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+        "hrsh7th/nvim-cmp",
+    },
+    config = function()
+        require("codeium").setup({
+           config_path = "/home/piotrek/.codeium/config.json",
+           bin_path = "/home/piotrek/.codeium/bin",
+           tools = {
+             uname = "uname",
+             uuidgen = "uuidgen",
+             curl = "curl",
+             gzip = "gzip",
+           },
+        })
+    end
+  },
 --  use({
 --	  'rose-pine/neovim',
 --	  as = 'rose-pine',
@@ -114,7 +137,7 @@ require('lazy').setup({
   },
 
   'folke/zen-mode.nvim',
-  'github/copilot.vim',
+  --'github/copilot.vim',
   'eandrju/cellular-automaton.nvim',
   'laytan/cloak.nvim',
 
