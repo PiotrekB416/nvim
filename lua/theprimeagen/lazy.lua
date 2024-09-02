@@ -40,6 +40,9 @@ require('lazy').setup({
   {
      'Exafunction/codeium.vim',
   },
+  {
+    'RRethy/base16-nvim'
+  },
 --  {
 --    "Exafunction/codeium.nvim",
 --    dependencies = {

@@ -1,5 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "50fcf17db7c75af80e6b6109acfbfb4504768780" },
+  "base16-nvim": { "branch": "master", "commit": "6ac181b5733518040a33017dde654059cd771b7c" },
   "ccls.nvim": { "branch": "main", "commit": "4950b31ac04443076797e4ad367b5db7305df047" },
   "cellular-automaton.nvim": { "branch": "main", "commit": "b7d056dab963b5d3f2c560d92937cb51db61cb5b" },
   "cloak.nvim": { "branch": "main", "commit": "648aca6d33ec011dc3166e7af3b38820d01a71e4" },
