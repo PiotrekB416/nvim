@@ -71,8 +71,6 @@ require('lazy').setup({
 --  })
 
   --theme
-  'Mofiqul/vscode.nvim',
-
   {
       "folke/trouble.nvim",
       config = function()

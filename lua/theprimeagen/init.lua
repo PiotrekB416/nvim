@@ -7,6 +7,8 @@ require("theprimeagen.lazy")
 
 --vim.cmd.packadd('YouCompleteMe')
 
+vim.cmd('colorscheme base16-gruvbox-dark-hard')
+
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
 
