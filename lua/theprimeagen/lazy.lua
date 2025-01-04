@@ -19,8 +19,20 @@ require('lazy').setup({
       require("lsp-debug-tools").restart({ expected = {}, name = "htmx-lsp", cmd = { "htmx-lsp", "--level", "DEBUG" }, root_dir = vim.loop.cwd(), });
     end
   },
+  {
+    "lervag/vimtex",
+    lazy = false,     -- we don't want to lazy load VimTeX
+  -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+    -- VimTeX configuration goes here, e.g.
+      vim.g.vimtex_view_method = "zathura"
+    end
+  },
   'wbthomason/packer.nvim',
-
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
   'ranjithshegde/ccls.nvim',
 
   {
@@ -107,7 +119,6 @@ require('lazy').setup({
       require('lsp-zero.settings').preset({})
     end
   },
-
   -- Autocompletion
   {
     'VonHeikemen/lsp-zero.nvim',
