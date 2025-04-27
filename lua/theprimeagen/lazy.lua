@@ -108,6 +108,15 @@ require('lazy').setup({
   'mbbill/undotree',
   'tpope/vim-fugitive',
   'nvim-treesitter/nvim-treesitter-context',
+  {
+    'nvim-flutter/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = true,
+  },
 
   {
     'VonHeikemen/lsp-zero.nvim',
@@ -125,7 +134,23 @@ require('lazy').setup({
     branch = 'v2.x',
     dependencies = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},             -- Required
+      {'neovim/nvim-lspconfig', config = function ()
+        local lspconfig = require("lspconfig")
+        lspconfig.clangd.setup({
+    	    -- 	cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+	        -- 	init_options = {
+        	-- 		fallbackFlags = { "-std=c++17" },
+	        -- 	},
+        })
+        lspconfig.opts = {
+	        servers = {
+		        clangd = {
+			        mason = false,
+		        },
+	        },
+        }
+        end
+      },             -- Required
       {'williamboman/mason.nvim'},           -- Optional
       {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
