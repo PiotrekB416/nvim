@@ -36,10 +36,14 @@ autocmd({"BufWritePre"}, {
     command = [[%s/\s\+$//e]],
 })
 
+autocmd({"BufReadPost","FileReadPost"}, {
+    group = ThePrimeagenGroup,
+    pattern = "*",
+    command = "normal zR",
+})
 
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldlevelstart = 99
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
